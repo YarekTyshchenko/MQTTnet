@@ -151,6 +151,22 @@ namespace MQTTnet.Server
 
                 foreach (var session in subscriberSessions)
                 {
+                    if (_sessions.TryGetValue(senderId, out var senderSession))
+                    {
+                        try
+                        {
+                            if ((string)senderSession.Items["tenant"] != (string)session.Items["tenant"])
+                            {
+                                continue;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger.Verbose("Client Session '{0}': Tenant not set in either client session or client connection'.",
+                                session.Id, applicationMessage.Topic);
+                            continue;
+                        }
+                    }
                     var checkSubscriptionsResult = session.SubscriptionsManager.CheckSubscriptions(
                         applicationMessage.Topic,
                         topicHash,
