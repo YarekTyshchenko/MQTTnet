@@ -168,6 +168,9 @@ namespace MQTTnet.Server
             }
 
             var retainedApplicationMessages = await _retainedMessagesManager.GetMessages().ConfigureAwait(false);
+
+            retainedApplicationMessages = retainedApplicationMessages.Where((retainedApplicationMessage) => Tenanting.CanSessionReceiveMessage(retainedApplicationMessage, _session)).ToList();
+
             var result = new SubscribeResult(subscribePacket.TopicFilters.Count);
 
             var addedSubscriptions = new List<string>();

@@ -10,9 +10,7 @@
     </Target>
 
     <PropertyGroup>
-        <TargetFrameworks>netstandard1.3;netstandard2.0;netstandard2.1;netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
-        <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">$(TargetFrameworks);net452;net461</TargetFrameworks>
-        <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' AND '$(MSBuildRuntimeType)' != 'Core' ">$(TargetFrameworks);uap10.0</TargetFrameworks>
+        <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
         <LangVersion>7.3</LangVersion>
         <AssemblyName>MQTTnet</AssemblyName>
         <RootNamespace>MQTTnet</RootNamespace>
@@ -22,7 +20,7 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <Description>MQTTnet is a high performance .NET library for MQTT based communication. It provides a MQTT client and a MQTT server (broker) and supports v3.1.0, v3.1.1 and v5.0.0 of the MQTT protocol.</Description>
         <Authors>The contributors of MQTTnet</Authors>
-        <PackageId>MQTTnet</PackageId>
+        <PackageId>Hark.MQTTnet</PackageId>
         <DelaySign>false</DelaySign>
         <SignAssembly>false</SignAssembly>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -30,7 +28,7 @@
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <Copyright>Copyright (c) .NET Foundation and Contributors</Copyright>
         <PackageProjectUrl>https://github.com/dotnet/MQTTnet</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/dotnet/MQTTnet.git</RepositoryUrl>
+        <RepositoryUrl>https://github.com/YarekTyshchenko/MQTTnet.git</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>MQTT Message Queue Telemetry Transport MQTTClient MQTTServer Server MQTTBroker Broker NETStandard IoT InternetOfThings Messaging Hardware Arduino Sensor Actuator M2M ESP Smart Home Cities Automation Xamarin Blazor</PackageTags>
         <NeutralLanguage>en-US</NeutralLanguage>
@@ -43,6 +41,7 @@
         <DisableImplicitAspNetCoreAnalyzers>true</DisableImplicitAspNetCoreAnalyzers>
         <NoWarn>1591;NETSDK1138</NoWarn>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <Version>4.0.0-preview5-tenanting.3</Version>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(TargetFramework)'=='uap10.0'">

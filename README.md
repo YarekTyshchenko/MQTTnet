@@ -10,6 +10,26 @@
 [![Join the chat at https://gitter.im/MQTTnet/community](https://badges.gitter.im/MQTTnet/community.svg)](https://gitter.im/MQTTnet/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://raw.githubusercontent.com/dotnet/MQTTnet/master/LICENSE)
 
+# Publishing a package to nuget
+
+Change the Version attribute in MQTTnet.csproj and MQTTnet.AspNetCore.csproj
+Build the packages
+```
+cd .\Source\MQTTnet\
+rm -r bin
+dotnet build -c Release
+cd ../..
+cd .\Source\MQTTnet.AspnetCore\
+rm -r bin
+dotnet build -c Release
+cd ../..
+```
+Publish the packages
+```
+nuget push "Source/MQTTnet.AspnetCore/**/*.nupkg" -Source "Hark_Nuget" -ApiKey az
+nuget push "Source/MQTTnet/**/*.nupkg" -Source "Hark_Nuget" -ApiKey az
+```
+
 # MQTTnet
 
 MQTTnet is a high performance .NET library for MQTT based communication. It provides a MQTT client and a MQTT server (broker) and supports the MQTT protocol up to version 5. It is compatible with mostly any supported .NET Framework version and CPU architecture.
