@@ -151,6 +151,11 @@ namespace MQTTnet.Server
 
                 foreach (var session in subscriberSessions)
                 {
+
+                    if (!Tenanting.CanSessionReceiveMessage(applicationMessage, session)) {
+                        continue;
+                    }
+
                     var checkSubscriptionsResult = session.SubscriptionsManager.CheckSubscriptions(
                         applicationMessage.Topic,
                         topicHash,
