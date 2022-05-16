@@ -21,7 +21,7 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <Description>MQTTnet is a high performance .NET library for MQTT based communication. It provides a MQTT client and a MQTT server (broker) and supports v3.1.0, v3.1.1 and v5.0.0 of the MQTT protocol.</Description>
         <Authors>The contributors of MQTTnet</Authors>
-        <PackageId>MQTTnet</PackageId>
+        <PackageId>Hark.MQTTnet</PackageId>
         <DelaySign>false</DelaySign>
         <SignAssembly>false</SignAssembly>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -41,7 +41,7 @@
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <DisableImplicitAspNetCoreAnalyzers>true</DisableImplicitAspNetCoreAnalyzers>
         <NoWarn>1591</NoWarn>
-        <Version>4.0.0-tenanting</Version>
+        <Version>4.0.0-preview5-tenanting.2</Version>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)'=='Debug'">
