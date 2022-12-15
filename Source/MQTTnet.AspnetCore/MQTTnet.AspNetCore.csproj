@@ -33,7 +33,7 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <NoWarn>1591</NoWarn>
-        <Version>4.0.0-preview5-tenanting.2</Version>
+        <Version>4.0.0-preview5-tenanting.3</Version>
     </PropertyGroup>
 
     <ItemGroup>

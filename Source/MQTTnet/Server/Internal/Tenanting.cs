@@ -13,8 +13,12 @@ namespace MQTTnet.Server
         /// <returns></returns>
         public static bool CanSessionReceiveMessage(MqttApplicationMessage applicationMessage, MqttSession session)
         {
-            ArgumentNullException.ThrowIfNull(session, nameof(session));
-            ArgumentNullException.ThrowIfNull(session.Items, nameof(session.Items));
+            if (session == null) {
+                throw new ArgumentNullException(nameof(session));
+            }
+            if (session.Items == null) {
+                throw new ArgumentNullException(nameof(session.Items));
+            }
 
             if (!session.Items.Contains("OrganizationId"))
             {
@@ -23,8 +27,12 @@ namespace MQTTnet.Server
 
             var sessionOrgId = (string)session.Items["OrganizationId"];
 
-            ArgumentNullException.ThrowIfNull(applicationMessage, nameof(applicationMessage));
-            ArgumentNullException.ThrowIfNull(applicationMessage.UserProperties, nameof(applicationMessage.UserProperties));
+            if (applicationMessage == null) {
+                throw new ArgumentNullException(nameof(applicationMessage));
+            }
+            if (applicationMessage.UserProperties == null) {
+                throw new ArgumentNullException(nameof(applicationMessage.UserProperties));
+            }
 
             foreach (var userProperty in applicationMessage.UserProperties)
             {
