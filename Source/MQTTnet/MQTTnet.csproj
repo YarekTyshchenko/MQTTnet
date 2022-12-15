@@ -41,7 +41,7 @@
         <DisableImplicitAspNetCoreAnalyzers>true</DisableImplicitAspNetCoreAnalyzers>
         <NoWarn>1591;NETSDK1138</NoWarn>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <Version>4.0.0-preview5-tenanting.3</Version>
+        <Version>4.0.0-preview5-tenanting.4</Version>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(TargetFramework)'=='uap10.0'">

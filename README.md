@@ -24,10 +24,15 @@ rm -r bin
 dotnet build -c Release
 cd ../..
 ```
-Publish the packages
+Publish the packages (with nuget)
 ```
 nuget push "Source/MQTTnet.AspnetCore/**/*.nupkg" -Source "Hark_Nuget" -ApiKey az
 nuget push "Source/MQTTnet/**/*.nupkg" -Source "Hark_Nuget" -ApiKey az
+```
+OR Publish the packages with dotnet nuget
+```
+dotnet nuget push "Source/MQTTnet.AspnetCore/**/*.nupkg" --source "Hark_Nuget" --api-key az
+dotnet nuget push "Source/MQTTnet/**/*.nupkg" --source "Hark_Nuget" --api-key az
 ```
 
 # MQTTnet
