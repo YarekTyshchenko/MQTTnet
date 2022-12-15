@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +26,6 @@ namespace MQTTnet.Server
         readonly MqttServerOptions _options;
         readonly MqttRetainedMessagesManager _retainedMessagesManager;
         readonly IMqttNetLogger _rootLogger;
-
-        readonly IDictionary _sessionItems = new ConcurrentDictionary<object, object>();
 
         CancellationTokenSource _cancellationTokenSource;
 
@@ -207,7 +204,18 @@ namespace MQTTnet.Server
             return _clientSessionsManager.GetSessionStatusAsync();
         }
 
-        public Task InjectApplicationMessage(InjectedMqttApplicationMessage injectedApplicationMessage, CancellationToken cancellationToken = default)
+        public Task InjectApplicationMessage(
+            InjectedMqttApplicationMessage injectedApplicationMessage,
+            CancellationToken cancellationToken = default) =>
+            InjectApplicationMessage(
+                injectedApplicationMessage,
+                new ConcurrentDictionary<object, object>(),
+                cancellationToken);
+
+        public Task InjectApplicationMessage(
+            InjectedMqttApplicationMessage injectedApplicationMessage,
+            ConcurrentDictionary<object, object> sessionItems,
+            CancellationToken cancellationToken = default)
         {
             if (injectedApplicationMessage == null)
             {
@@ -230,7 +238,7 @@ namespace MQTTnet.Server
 
             return _clientSessionsManager.DispatchApplicationMessage(
                 injectedApplicationMessage.SenderClientId,
-                _sessionItems,
+                sessionItems,
                 injectedApplicationMessage.ApplicationMessage,
                 cancellationToken);
         }
