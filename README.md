@@ -35,6 +35,16 @@ dotnet nuget push "Source/MQTTnet.AspnetCore/**/*.nupkg" --source "Hark_Nuget" -
 dotnet nuget push "Source/MQTTnet/**/*.nupkg" --source "Hark_Nuget" --api-key az
 ```
 
+If credentials don't work try adding creds to the NuGet.Config file (inside <configuration>) where ClearTextPassword is a Personal Access Token:
+```
+ <packageSourceCredentials>
+    <Hark_Nuget>
+      <add key="Username" value="tom.boothman@harksys.com" />
+      <add key="ClearTextPassword" value="xxxxx" />
+    </Hark_Nuget>
+  </packageSourceCredentials>
+```
+
 # MQTTnet
 
 MQTTnet is a high performance .NET library for MQTT based communication. It provides a MQTT client and a MQTT server (broker) and supports the MQTT protocol up to version 5. It is compatible with mostly any supported .NET Framework version and CPU architecture.
