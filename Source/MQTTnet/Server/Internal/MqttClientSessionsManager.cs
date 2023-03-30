@@ -99,6 +99,15 @@ namespace MQTTnet.Server
             {
                 await connection.StopAsync(MqttDisconnectReasonCode.NormalDisconnection).ConfigureAwait(false);
             }
+
+            this._options.PersistentSessions?.Invoke(
+                _sessions.Select(
+                    s => new SessionData
+                    {
+                        ClientId = s.Value.Id,
+                        Items = s.Value.Items,
+                        Topics = s.Value.GetSubscribedTopics,
+                    }));
         }
 
         public async Task DeleteSessionAsync(string clientId)
@@ -278,15 +287,6 @@ namespace MQTTnet.Server
 
             lock (_sessionsManagementLock)
             {
-                this._options.PersistentSessions?.Invoke(
-                    _sessions.Select(
-                        s => new SessionData
-                        {
-                            ClientId = s.Value.Id,
-                            Items = s.Value.Items,
-                            Topics = s.Value.GetSubscribedTopics,
-                        }));
-
                 foreach (var sessionItem in _sessions)
                 {
                     sessionItem.Value.Dispose();
