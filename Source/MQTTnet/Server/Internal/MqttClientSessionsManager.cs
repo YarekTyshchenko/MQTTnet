@@ -50,6 +50,34 @@ namespace MQTTnet.Server
                 throw new ArgumentNullException(nameof(logger));
             }
 
+            // Get sessions from a function in the options
+            if (options.InitSessions != null)
+            {
+                foreach (var data in options.InitSessions())
+                {
+                    var session = new MqttSession(
+                        data.ClientId,
+                        true,
+                        data.Items,
+                        options,
+                        eventContainer,
+                        retainedMessagesManager,
+                        this);
+
+                    var fakeSubscribePacket = new MqttSubscribePacket();
+                    fakeSubscribePacket.TopicFilters.AddRange(
+                        data.Topics.Select(
+                            t => new MqttTopicFilter
+                            {
+                                Topic = t,
+                                QualityOfServiceLevel = MqttQualityOfServiceLevel.AtLeastOnce,
+                            }));
+                    session.Subscribe(fakeSubscribePacket, CancellationToken.None);
+
+                    _sessions.TryAdd(data.ClientId, session);
+                }
+            }
+
             _logger = logger.WithSource(nameof(MqttClientSessionsManager));
             _rootLogger = logger;
 
@@ -250,6 +278,15 @@ namespace MQTTnet.Server
 
             lock (_sessionsManagementLock)
             {
+                this._options.PersistentSessions?.Invoke(
+                    _sessions.Select(
+                        s => new SessionData
+                        {
+                            ClientId = s.Value.Id,
+                            Items = s.Value.Items,
+                            Topics = s.Value.GetSubscribedTopics,
+                        }));
+
                 foreach (var sessionItem in _sessions)
                 {
                     sessionItem.Value.Dispose();

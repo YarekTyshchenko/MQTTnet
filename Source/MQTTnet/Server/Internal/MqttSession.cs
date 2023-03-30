@@ -49,6 +49,8 @@ namespace MQTTnet.Server
             _subscriptionsManager = new MqttClientSubscriptionsManager(this, eventContainer, retainedMessagesManager, clientSessionsManager);
         }
 
+        public IEnumerable<string> GetSubscribedTopics => _subscribedTopics;
+
         public DateTime CreatedTimestamp { get; } = DateTime.UtcNow;
 
         public bool HasSubscribedTopics => _subscribedTopics != null && _subscribedTopics.Count > 0;

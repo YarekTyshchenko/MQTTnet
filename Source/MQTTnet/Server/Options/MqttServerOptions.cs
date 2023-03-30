@@ -6,6 +6,8 @@ using System;
 
 namespace MQTTnet.Server
 {
+    using System.Collections.Generic;
+
     public sealed class MqttServerOptions
     {
         public TimeSpan DefaultCommunicationTimeout { get; set; } = TimeSpan.FromSeconds(100);
@@ -35,5 +37,9 @@ namespace MQTTnet.Server
         ///     Do not change this value when no memory issues are experienced.
         /// </summary>
         public int WriterBufferSizeMax { get; set; } = 65535;
+
+        public Func<IEnumerable<SessionData>> InitSessions { get; set; } = null;
+
+        public Action<IEnumerable<SessionData>> PersistentSessions { get; set; } = null;
     }
 }

@@ -16,6 +16,8 @@ using System.Security.Cryptography.X509Certificates;
 // ReSharper disable UnusedMember.Global
 namespace MQTTnet.Server
 {
+    using System.Collections.Generic;
+
     public class MqttServerOptionsBuilder
     {
         readonly MqttServerOptions _options = new MqttServerOptions();
@@ -201,6 +203,19 @@ namespace MQTTnet.Server
         //     _options.ClientId = value;
         //     return this;
         // }
+
+        public MqttServerOptionsBuilder WithInitialSessions(
+            Func<IEnumerable<SessionData>> f)
+        {
+            _options.InitSessions = f;
+            return this;
+        }
+
+        public MqttServerOptionsBuilder WithSessionsPersist(Action<IEnumerable<SessionData>> f)
+        {
+            _options.PersistentSessions = f;
+            return this;
+        }
 
         public MqttServerOptions Build()
         {
