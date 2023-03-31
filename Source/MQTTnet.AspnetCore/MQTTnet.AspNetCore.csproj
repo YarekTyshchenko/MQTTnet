@@ -34,7 +34,7 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <NoWarn>1591;NETSDK1138</NoWarn>
         <LangVersion>7.3</LangVersion>
-        <Version>4.0.2-tenanting.4</Version>
+        <Version>4.0.2-tenanting.5</Version>
     </PropertyGroup>
 
     <ItemGroup>
