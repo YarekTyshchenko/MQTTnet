@@ -101,13 +101,15 @@ namespace MQTTnet.Server
             }
 
             this._options.PersistentSessions?.Invoke(
-                _sessions.Select(
-                    s => new SessionData
-                    {
-                        ClientId = s.Value.Id,
-                        Items = s.Value.Items,
-                        Topics = s.Value.GetSubscribedTopics,
-                    }));
+                _sessions
+                    .Where(x => x.Value.IsPersistent)
+                    .Select(
+                        s => new SessionData
+                        {
+                            ClientId = s.Value.Id,
+                            Items = s.Value.Items,
+                            Topics = s.Value.GetSubscribedTopics,
+                        }));
         }
 
         public async Task DeleteSessionAsync(string clientId)
